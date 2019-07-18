@@ -22,7 +22,6 @@ img.name
 ec2_apse2 = session.resource('ec2', region_name='ap-southeast-2')
 img.name
 ec2_ap2 = ec2_apse2.Img('ami-09ff6a63071e9b2b1')
-img_apse2 = ec2_apse2.Img('ami-09ff6a63071e9b2b1')
 img_apse2 = ec2_apse2.Image('ami-09ff6a63071e9b2b1')
 img_apse2.name
 ec2_apse2 = session.resource('ec2', region_name='ap-southeast-2')
@@ -42,16 +41,12 @@ list(ec2_apse2.images.filter(Owners=['amazon'], Filters = filters))
 img
 key
 instances = ec2.create_instances(ImageId=img.id, MinCount=1, MaxCount=1, InstanceType='t2.micro', KeyName=key.key_name)
-instances = ec2.create_instances(ImageId=img.id, MinCount=1, MaxCount=1, InstanceType='t2.micro', KeyName=key.key_name)
 instances
 ec2.Instance(id='i-0336e6bdbb4d16192')
 inst = instances[0]
 inst.terminate()
 inst = instances[0]
 inst.public_dns_name
-inst.wait_until_running()
-inst.wait_until_running()
-inst.wait_until_running()
 inst.wait_until_running()
 inst.reload()
 inst.public_dns_name
@@ -64,5 +59,3 @@ inst.public_dns_name
 inst.security_groups
 sg = ec2.SecurityGroup(inst.security_groups[0]['GroupId'])
 sg.authorize_ingress(IpPermissions=[{'FromPort': 22, 'TopPort': 22, 'IpProtocal': 'TCP' , 'IpRanges': ['CidrIp': '172.31.85.64/00']}])
-sg.authorize_ingress(IpPermissions=[{'FromPort': 22, 'TopPort': 22, 'IpProtocal': 'TCP' , 'IpRanges': [{'CidrIp': '172.31.85.64/32'}]}])
-sg.authorize_ingress(IpPermissions=[{'FromPort': 22, 'TopPort': 22, 'IpProtocal': 'TCP' , 'IpRanges': [{'CidrIp': '172.31.85.64/00'}]}])
